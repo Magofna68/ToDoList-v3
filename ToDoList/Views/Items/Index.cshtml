@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@using ToDoList.Models;
+@model List<ToDoList.Models.Item>;
+
+<h1>Items</h1>
+
+<ul>
+  @foreach (Item item in Model)
+  {
+    @* @foreach loop that includes an HTML helper method to link to a specific item's detail: *@
+    <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId })</li>
+    //string interpolation
+    //{ id = item.ItemId } creates an anonymous object with the property id
+  }
+</ul>
+
+<p>@Html.ActionLink("Add new item", "Create")</p>
+@* property names of the object we pass in must match parameter names used by the target method. In this case, it will need to match the parameter names in our Details() route method. *@

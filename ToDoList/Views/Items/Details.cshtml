@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+@model ToDoList.Models.Item
+
+<h2>Item Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)<h3>
+    <p>@Html.ActionLink("Back to list", "Index")</p>
+
+    <p>@Html.ActionLink("Edit Item", "Edit", new { id = Model.ItemId }) </p>
+
+    <p>@Html.ActionLink("Delete Item", "Delete", new { id = Model.ItemId }) </p>
+
+    @* We start with a model directive so the view can reference the model.
+
+      We use two new HTML helper methods: DisplayNameFor() and DisplayFor(). The former displays the property name while
+      the latter displays the value of that property. For a task with a description of "Wash rhino," this will be rendered
+      as Description: "Wash rhino" in our HTML.
+
+      Finally, we use another ActionLink() to render a link that will return the user to the index route. *@
