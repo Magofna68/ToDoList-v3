@@ -4,15 +4,15 @@ namespace ToDoList.Models
 {
   public class ToDoListContext : DbContext
   {
-    public virtual DbSet<Categories> Categories { get; set; }
+    public virtual DbSet<Category> Categories { get; set; }
     public DbSet<Item> Items { get; set; }
 
     public ToDoListContext(DbContextOptions options) : base(options) { }
   }
-  protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-  { //Notice that we add the OnConfiguring method to enable lazy-loading.
-    optionsBuilder.UseLazyLoadingProxies();
-  }
+  // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+  // { //Notice that we add the OnConfiguring method to enable lazy-loading.
+  //   optionsBuilder.UseLazyLoadingProxies();
+  // }
 }
 
 // Our ToDoListContext class inherits, or extends, from Entity Framework's DbContext. This ensures it includes all default built-in DbContext functionality.

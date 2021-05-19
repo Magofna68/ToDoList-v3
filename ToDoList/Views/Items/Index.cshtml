@@ -7,15 +7,20 @@
 
 <h1>Items</h1>
 
-<ul>
-  @foreach (Item item in Model)
-  {
-    @* @foreach loop that includes an HTML helper method to link to a specific item's detail: *@
-    <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId })</li>
-    //string interpolation
-    //{ id = item.ItemId } creates an anonymous object with the property id
-  }
-</ul>
+@if (@Model.Count == 0)
+{
+  <h3>No items have been added yet!</h3>
+}
+@foreach (Item item in Model)
+{
+  @* @foreach loop that includes an HTML helper method to link to a specific item's detail: *@
+  <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId })</li>
+  //string interpolation
+  //{ id = item.ItemId } creates an anonymous object with the property id
+}
 
 <p>@Html.ActionLink("Add new item", "Create")</p>
-@* property names of the object we pass in must match parameter names used by the target method. In this case, it will need to match the parameter names in our Details() route method. *@
+@* property names of the object we pass in must match parameter names used by the target method. In this case, it will
+  need to match the parameter names in our Details() route method. *@
+
+<p>@Html.ActionLink("Home", "Index", "Home")</p>

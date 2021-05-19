@@ -3,6 +3,7 @@ using ToDoList.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ToDoList.Controllers
 {
@@ -19,10 +20,11 @@ namespace ToDoList.Controllers
 
     public ActionResult Index()
     {
-      List<Item> model = _db.Items.ToList();
+      List<Item> model = _db.Items.Include(item => item.Category).ToList();
       return View(model);
-      // Instead of using a verbose GetAll() method with raw SQL, we can instead access all our Items in List form by doing the following: db.Items.ToList()
     }
+    // Instead of using a verbose GetAll() method with raw SQL, we can instead access all our Items in List form by doing the following: db.Items.ToList()
+
     //db is an instance of our DbContext class. It's holding a reference to our database.
 
     // Once there, it looks for an object named Items. This is the DbSet we declared in ToDoListContext.cs.
@@ -33,6 +35,7 @@ namespace ToDoList.Controllers
 
     public ActionResult Create()
     {
+      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
       return View();
     }
 
@@ -54,6 +57,7 @@ namespace ToDoList.Controllers
     public ActionResult Edit(int id)
     {
       var thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
+      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
       return View(thisItem);
     }
 
