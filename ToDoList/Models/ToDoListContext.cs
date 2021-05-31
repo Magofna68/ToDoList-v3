@@ -1,11 +1,14 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ToDoList.Models
 {
-  public class ToDoListContext : DbContext
+  public class ToDoListContext : IdentityDbContext<ApplicationUser>
   {
     public virtual DbSet<Category> Categories { get; set; }
     public DbSet<Item> Items { get; set; }
+    public DbSet<CategoryItem> CategoryItem { get; set; }
+    //Each DbSet we've included will become a table in our database. We've previously declared both Categories and Items DbSets, but now include a CategoryItem DbSet as well that represents our join table.
 
     public ToDoListContext(DbContextOptions options) : base(options) { }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

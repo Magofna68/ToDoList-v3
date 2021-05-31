@@ -1,17 +1,29 @@
 using System.Collections.Generic;
 // using MySql.Data.MySqlClient;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ToDoList.Models
 {
   public class Item
   {
-    public string Description { get; set; }
+    public Item()
+    {
+      this.JoinEntities = new HashSet<CategoryItem>();
+      ItemCompleted = false;
+    }
     public int ItemId { get; set; }
+    public string Description { get; set; }
 
-    public int CategoryId { get; set; }
-    public virtual Category Category { get; set; }
+
+    [Display(Name = "Item Completed")]
+    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+    public bool ItemCompleted { get; set; }
+    public DateTime DueDate { get; set; }
+
+    public virtual ICollection<CategoryItem> JoinEntities { get; }
   }
-}
+} //JoinEntities, which will hold the list of relationships this Item is a part of -- which is how we will find its related Categories.
 
 // public Item(string description)
 // {

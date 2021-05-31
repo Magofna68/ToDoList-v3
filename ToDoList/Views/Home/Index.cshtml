@@ -4,6 +4,7 @@
 
 <h1>Welcome to the To Do List!</h1>
 <p>@Html.ActionLink("See all items", "Index", "Items")</p>
+
 @* The ActionLink() method is called on @Html. It takes two required parameters as well as an optional third parameter.
 
   The first parameter "See all items" is the display text for the link. In other words, a user will see a link that says
@@ -14,6 +15,7 @@
 
   We will also have to add the optional third parameter since we need to route to another controller. In this case, we
   want to route to the Index() action of the ItemsController. Note that our third parameter is the name of the controller
-  without Controller appended to it. *@
+  without Controller appended to it.*@
 <p>@Html.ActionLink("See all categories", "Index", "Categories")</p>
-<p>@Html.ActionLink("Add new item", "Create")</p>
+<p>@Html.ActionLink("Add new item", "Create", "Items")</p>
+<p>@Html.ActionLink("Create an account", "Index", "Account")</p>

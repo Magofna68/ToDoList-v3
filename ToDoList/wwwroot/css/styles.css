@@ -1,4 +1,4 @@
-div#footer {
+/* div#footer {
 	position:fixed;
 	bottom:0px;
 	left:0px;
@@ -6,4 +6,15 @@ div#footer {
 	color:#CCC;
 	background:#333;
 	padding:8px;
+} */
+
+html {
+	margin-left: 2%;
+	background-color: teal;
+}
+
+h1 {
+	text-align: center;
+	font-family: Courier;
+	background: darkblue;
 }

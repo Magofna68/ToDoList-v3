@@ -11,15 +11,19 @@
 {
   <h3>No items have been added yet!</h3>
 }
-@foreach (Item item in Model)
+@foreach (Item item in Model.OrderBy(d => d.DueDate))
 {
   @* @foreach loop that includes an HTML helper method to link to a specific item's detail: *@
-  <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId })</li>
-  //string interpolation
-  //{ id = item.ItemId } creates an anonymous object with the property id
+  <li>@Html.ActionLink($"{item.Description}" + $"{item.DueDate}", "Details", new { id = item.ItemId })
+  <input type="checkbox" checked="**true or false?**">
+</li>
 }
+@* string interpolation
+  { id = item.ItemId } creates an anonymous object with the property id *@
+
 
 <p>@Html.ActionLink("Add new item", "Create")</p>
+
 @* property names of the object we pass in must match parameter names used by the target method. In this case, it will
   need to match the parameter names in our Details() route method. *@
 

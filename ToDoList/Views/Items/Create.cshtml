@@ -13,7 +13,11 @@
   //lambda expression
   @Html.TextBoxFor(model => model.Description)
   //LabelFor() and TextBoxFor(). The first generates a label for a form field while the second generates a text box.
-  @Html.LabelFor(model => model.Category)
+
+  @Html.LabelFor(model => model.DueDate)
+  @Html.EditorFor(model => model.DueDate)
+
+  @Html.Label("Select category")
   @Html.DropDownList("CategoryId")
 
   <input type="submit" value="Add new item" class="btn btn-default" />

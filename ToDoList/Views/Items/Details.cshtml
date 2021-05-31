@@ -6,17 +6,41 @@
 
 <h2>Item Details</h2>
 <hr />
-<h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)<h3>
-    <p>@Html.ActionLink("Back to list", "Index")</p>
+<h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h3>
 
-    <p>@Html.ActionLink("Edit Item", "Edit", new { id = Model.ItemId }) </p>
+@if (@Model.JoinEntities.Count == 0)
+{
+  <p>This item does not belong to any categories</p>
+}
+else
+{
+  <h4>Categories the item belongs to:</h4>
+  <ul>
+  @foreach (var join in Model.JoinEntities)
+    {
+      <li>@join.Category.Name</li>
+      @using (Html.BeginForm("DeleteCategory", "Items"))
+      { 
+        //We add the form to the foreach loop block so that we can create a separate delete button for each category. We pass in two arguments to our BeginForm() method. The first argument is the route method that we'd like to invoke and the second argument is the controller 
+        @Html.Hidden("joinId", @join.CategoryItemId)
 
-    <p>@Html.ActionLink("Delete Item", "Delete", new { id = Model.ItemId }) </p>
+        //We also pass through a Hidden() method with two arguments. The first argument is the name of the route parameter variable we'd like to pass and the second is the actual value of that parameter
+        <input type="submit" value="Delete" />
+      }
+    }
+  </ul>
+}
 
-    @* We start with a model directive so the view can reference the model.
+<p>@Html.ActionLink("Add a Category", "AddCategory", new { id = Model.ItemId })</p>
 
-      We use two new HTML helper methods: DisplayNameFor() and DisplayFor(). The former displays the property name while
-      the latter displays the value of that property. For a task with a description of "Wash rhino," this will be rendered
-      as Description: "Wash rhino" in our HTML.
+<p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("Edit Item", "Edit", new { id = Model.ItemId })</p>
+<p>@Html.ActionLink("Delete Item", "Delete", new { id = Model.ItemId })</p>
 
-      Finally, we use another ActionLink() to render a link that will return the user to the index route. *@
+@* We start with a model directive so the view can reference the model.
+
+  We use two new HTML helper methods: DisplayNameFor() and DisplayFor(). The former displays the property name while
+  the latter displays the value of that property. For a task with a description of "Wash rhino," this will be rendered
+  as Description: "Wash rhino" in our HTML.
+
+  Finally, we use another ActionLink() to render a link that will return the user to the index route.*@
